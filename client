@@ -22,7 +22,7 @@ esac
 #Affichage des directory disponible dans le serveur
 
 function mode_list{
-    echo "-------------------"
+    echo "-------------------\n"
     echo "Mode liste"
     echo "Affichage des directory sur le serveur"
     ls archive
