@@ -49,18 +49,18 @@ function interaction() {
     local cmd args
     while true; do
 	read cmd args || exit -1
-	fun="commande-$cmd"
+	fun="mode-$cmd"
 	if [ "$(type -t $fun)" = "function" ]; then
 	    $fun $args
 	else
-	    commande-non-comprise $fun $args
+	    mode-non-compris $fun $args
 	fi
     done
 }
 
 # Les fonctions implémentant les différentes commandes du serveur
 
-function commande-vsh_list(){
+function mode-vsh_list(){
       nbLignes=$(ls -t ./archives/ | wc -l) # retourne le nombre de lignes soit le nombres d'archives sur le serveur.     
       echo ""
       echo "Il y a actuellement $nbLignes archives sur le serveur"
@@ -69,12 +69,11 @@ function commande-vsh_list(){
       echo ""
 }
 
-function commande-non-comprise () {
-   echo "Le serveur ne peut pas interpréter cette commande"
-}
-
-function commande-shutdow() {
-       shutdown -t 10
+function mode-non-compris () {
+   echo "Ce mode n'existe pas , vous avez le choix entre :"
+   echo " 1) vsh_list "
+   echo " 2) vsh_extract "
+   echo " 3) vsh_browse "
 }
 
 
