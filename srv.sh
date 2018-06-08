@@ -60,6 +60,12 @@ function interaction() {
 
 # Les fonctions implémentant les différentes commandes du serveur
 
+function commande-vsh_list(){
+      nbLignes=$(ls -t ./archives/ | wc -l) # retourne le nombre de lignes soit le nombres d'archives sur le serveur.     
+      echo "\nIl y a actuellement $nbLignes archives.\n"
+      ls -1t ./archives/
+      echo ""
+}
 
 function commande-non-comprise () {
    echo "Le serveur ne peut pas interpréter cette commande"
