@@ -4,13 +4,13 @@
 #On laisse le choix à l'utilisateur de ce qu'il veut effectuer
 
 case $1 in 
-          -list)
+          '-list')
           mode_list;;
           
-          -browse)
+          '-browse')
           mode_browse;;
           
-          -extract)
+          '-extract')
           mode_extract;; 
           
           *)
@@ -25,7 +25,7 @@ function mode_list{
     echo "-------------------\n"
     echo "Mode liste"
     echo "Affichage des directory sur le serveur"
-    ls archive
+    vsh_list
 }
 
 #Utilisation des commandes de base pwd , ls , cd ,cat et rm dans le serveur
@@ -34,6 +34,7 @@ function mode_browse{
     echo "-------------------"
     echo "Mode browse"
     echo "Accès au commande pwd , ls , cd , cat et rm"
+    vsh_browse
 }
 
 #On peut recuperer un fichier un directory
@@ -42,4 +43,5 @@ function mode_extract{
     echo "-------------------"
     echo "Mode extract"
     echo "Accès au commande pwd , ls et cd"
+    vsh_extract
 }
