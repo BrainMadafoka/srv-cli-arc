@@ -70,7 +70,9 @@ function mode-vsh_list(){
 }
 
 function mode-non-compris () {
+   echo ""
    echo "Ce mode n'existe pas , vous avez le choix entre :"
+   echo ""
    echo "vsh_list "
    echo "vsh_extract "
    echo "vsh_browse "
