@@ -60,7 +60,7 @@ function interaction() {
 
 # Les fonctions implémentant les différentes commandes du serveur
 
-function mode-vsh_list(){
+function mode-vsh list(){
       nbLignes=$(ls -t ./archives/ | wc -l) # retourne le nombre de lignes soit le nombres d'archives sur le serveur.     
       echo ""
       echo "Il y a actuellement $nbLignes archives sur le serveur"
