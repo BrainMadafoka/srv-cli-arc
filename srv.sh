@@ -37,11 +37,11 @@ function accept-loop() {
 # La fonction interaction lit les commandes du client sur entrée standard 
 # et envoie les réponses sur sa sortie standard. 
 #
-# 	CMD arg1 arg2 ... argn                   
+# 	MODE arg1 arg2 ... argn                   
 #                     
 # alors elle invoque la fonction :
 #                                                                            
-#         commande-CMD arg1 arg2 ... argn                                      
+#         mode-CMD arg1 arg2 ... argn                                      
 #                                                                              
 # si elle existe; sinon elle envoie une réponse d'erreur.                     
 
