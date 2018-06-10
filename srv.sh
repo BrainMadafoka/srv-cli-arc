@@ -99,6 +99,7 @@ function mode-vsh-extract() {
 
   mkdir temporary_files
   cat $ARCHIVE | grep "directory [A-Za-z0-9]*/" | sed "s/directory //g" > mydirectories.txt
+  sed '/^directory [A-Za-z0-9]*/!d;s/^directory //;s/\r$//' $ARCHIVE
 
 
   xargs -I {} mkdir -p "{}" < mydirectories.txt
