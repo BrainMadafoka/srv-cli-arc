@@ -44,14 +44,35 @@ function accept-loop() {
 #         mode-CMD arg1 arg2 ... argn                                      
 #                                                                              
 # si elle existe; sinon elle envoie une réponse d'erreur.                     
-
 function interaction() {
-    local cmd args
+    local cmd args serv port archive
     while true; do
-	read cmd args || exit -1
-	fun="mode-$cmd"
-	if [ "$(type -t $fun)" = "function" ]; then
-	    $fun $args
+	read cmd args serv port archive || exit -1
+	fun="mode-$cmd$args" #pour list
+		
+	if [ "$(type -t $fun $args)" = "function" ]; then
+
+		if [ -z $serv ]; then
+		    echo ""
+		    echo "Il manque un nom de serveur"
+		    echo "---------"
+
+		elif [ -z $port ]; then
+		   echo ""
+	           echo "Il manque un numéro de port"
+		   echo "---------"
+
+		else
+		    if [ $args = "-extract" ]; then	 #Si extract ou browse, demande un nom archive 
+		        if [ -z $archive ]; then
+			    echo "Veuillez insérer une archive !"
+			else
+			    $fun
+			fi
+		    else				   	  
+			$fun
+		    fi
+		fi			
 	else
 	    mode-non-compris $fun $args
 	fi
