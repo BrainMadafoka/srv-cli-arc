@@ -328,23 +328,25 @@ function mode-vsh-extract() {
 
 
 	    if [[ $rights == d* ]]; then
+
+	       oneSlashDir=$(echo $THE_PATH/$files_and_dirs | sed -e 's/\/\{2,\}/\//g') #enleve les doublons de /.
 	       echo "----------------------------------------"
-	       echo "Le server a trouvé un répertoire situé dans $THE_PATH/$files_and_dirs"
+	       echo "Le server a trouvé un répertoire situé dans $oneSlashDir"
 	       echo "Ajout des droits $rights à ce répertoire.."
 	       #On retire tout les droit avant de les ajouter
-	       chmod 000 $THE_PATH'/'$files_and_dirs
+	       chmod 000 $oneSlashDir
 
-	       chmod u+$user_rights_1 $THE_PATH'/'$files_and_dirs
-	       chmod u+$user_rights_2 $THE_PATH'/'$files_and_dirs
-	       chmod u+$user_rights_3 $THE_PATH'/'$files_and_dirs
+	       chmod u+$user_rights_1 $oneSlashDir
+	       chmod u+$user_rights_2 $oneSlashDir
+	       chmod u+$user_rights_3 $oneSlashDir
 
-	       chmod g+$group_rights_1 $THE_PATH'/'$files_and_dirs
-	       chmod g+$group_rights_2 $THE_PATH'/'$files_and_dirs
-	       chmod g+$group_rights_3 $THE_PATH'/'$files_and_dirs
+	       chmod g+$group_rights_1 $oneSlashDir
+	       chmod g+$group_rights_2 $oneSlashDir
+	       chmod g+$group_rights_3 $oneSlashDir
 
-	       chmod o+$other_rights_1 $THE_PATH'/'$files_and_dirs
-	       chmod o+$other_rights_2 $THE_PATH'/'$files_and_dirs
-	       chmod o+$other_rights_3 $THE_PATH'/'$files_and_dirs
+	       chmod o+$other_rights_1 $oneSlashDir
+	       chmod o+$other_rights_2 $oneSlashDir
+	       chmod o+$other_rights_3 $oneSlashDir
 
 
 	    elif [[ $rights  == -* ]]; then
@@ -431,6 +433,7 @@ function mode-vsh-extract() {
 rm -f mydirectories.txt
 rm -rf temporary_files/*
 }
+
 
 
 function mode-non-compris () {
