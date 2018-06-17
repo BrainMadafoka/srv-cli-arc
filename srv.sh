@@ -237,10 +237,20 @@ function mode-vsh-help(){
 }
 
 function mode-vsh-extract() {
-	echo "[Server] You asked for the extraction of the following archive(s): $archive"
+	echo "------------------------------------------------------"
+	echo "Vous avez demandé l'extraction de l'archive suivante : $archive"
 
+	ARCHIVE=archives/$archive
 
-	  ARCHIVE=archives/$archive
+	if [ ! -e $ARCHIVE ];then
+	  echo ""
+	  echo "L'archive $archive n'est pas présente sur le serveur."
+	  echo "------------------------------------------------------"
+	  echo ""
+	else
+	  echo "Traitement en cours.."
+	  echo ""
+
 
 	  mkdir temporary_files
 	  
@@ -253,9 +263,6 @@ function mode-vsh-extract() {
 
 	  x=$(cat $ARCHIVE | sed -n '1p' | cut -f2 -d ':' | sed 's/\r$//' )
 	  y=$(cat $ARCHIVE | wc -l)
-
-	  echo " ici cest a : $x"
-	  echo " ici cest b : $y"
 
 	  while [ $x -le $y ]; do
 	  FILE_BODY=$(cat $ARCHIVE | sed -n $x'p')
@@ -321,9 +328,9 @@ function mode-vsh-extract() {
 
 
 	    if [[ $rights == d* ]]; then
-	       echo "-------------------------------------------------"
-	       echo "The server found a directory located in $THE_PATH$files_and_dirs"
-	       echo "Adding the rights $rights to it..."
+	       echo "----------------------------------------"
+	       echo "Le server a trouvé un répertoire situé dans $THE_PATH/$files_and_dirs"
+	       echo "Ajout des droits $rights à ce répertoire.."
 	       #On retire tout les droit avant de les ajouter
 	       chmod 000 $THE_PATH'/'$files_and_dirs
 
@@ -345,25 +352,20 @@ function mode-vsh-extract() {
 
 		A=$(echo $THE_PATH | sed 's/.*\([A-Za-Z0-9"/"]\)$/\1/g')
 	 
-		echo "Files dir rights : $files_and_dirs"
-		echo "CA CEST LE DEBUTFISH : $files_start"
-		echo "CA CEST LE TAILLEFISH : $files_size"
 		files_start=$(echo "$files_start" | tr -d $'\r')
 		files_size=$(echo "$files_size" | tr -d $'\r')
 
 		if [ $files_size -eq 0 ]; then
 	  	   	maxtaille=$files_start 
-	  	  	echo "MAXTAILLE : $maxtaille"
 		else
 	  	   	maxtaille=$(echo "$files_start + $files_size" - 1 | bc)
-	  	  	echo "MAXTAILLE DANS LE CAS -1 : $maxtaille"
 		fi
 
 
 		   if [ $A == "/" ]; then
-		       echo "-------------------------------------------------"
-		       echo "The server found a file located in $THE_PATH$files_and_dirs"
-	     	       echo "Adding the rights $rights to it..."
+		       echo "----------------------------------------"
+		       echo "Le server a trouvé un fichier situé dans $THE_PATH$files_and_dirs"
+	     	       echo "Ajout des droits $rights à ce fichier.."
 
 		       touch $THE_PATH$files_and_dirs
 		       #On retire tout les droit avant de les ajouter
@@ -388,9 +390,9 @@ function mode-vsh-extract() {
 		      let "files_start++"
 		      done
 		    else
-		       echo "-------------------------------------------------"
-		       echo "The server found a file located in $THE_PATH/$files_and_dirs"
-		       echo "Adding the rights $rights to it..."
+		       echo "----------------------------------------"
+		       echo "Le server a trouvé un fichier situé dans $THE_PATH/$files_and_dirs"
+		       echo "Ajout des droits $rights à ce fichier."
 
 		       touch $THE_PATH'/'$files_and_dirs
 		       #On retire tous les droits avant de les ajouter
@@ -424,11 +426,12 @@ function mode-vsh-extract() {
 
 
 	  done <mydirectories.txt
-
+	fi
 #Cleaning...
 rm -f mydirectories.txt
 rm -rf temporary_files/*
 }
+
 
 function mode-non-compris () {
    echo "-------------------------------------------------"
