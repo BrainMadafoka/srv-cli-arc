@@ -172,12 +172,12 @@ function mode-vsh-browse(){
 	}
 
 	function vsh_cat(){
-#TODO	    #$right=$(grep $arch $1 | cut -d ' ' -f2 | cut -c1)
+	    right=$(grep $1 $arch | cut -d ' ' -f2 | cut -c1)
 	    #echo "right $right"
 
-	    if [ $right == -* | bc];then
+	    if [[ $right == -* ]];then
 	    	arg=$1
-	    	path=$(cat /tmp/projet_path.txt)
+	    	#path=$(cat /tmp/projet_path.txt)
 	    	header_end=$(grep -n ^@$ $arch | tail -1 | awk -F: '{print $1}')
 	    	file_start=$(grep $arg $arch | awk '{print $4}' )
 	    	file_size=$(grep $arg $arch | awk '{print $5}' )
