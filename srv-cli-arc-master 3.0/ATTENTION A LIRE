@@ -1,0 +1,9 @@
+ATTENTION :
+
+Vérifier fichier vide toto4 -> 0 17 0 -> contient une ligne dans l'archive de base (PB ligne ?)
+
+Archive 2 : Ajout d'un fichier exe et ajout dans l'archive les lignes de fin
+
+
+ArchivePerso !!! : ajout de nombreux fichiers et directory pour vérifier que tout fonctinonne
+n'importe ce qu'il peut arriver, seul pb -> toto4 censé être vide, mais contient une ligne.
