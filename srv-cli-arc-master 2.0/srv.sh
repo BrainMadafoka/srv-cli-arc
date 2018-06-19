@@ -129,7 +129,6 @@ function mode-vsh-browse(){
 
 
 function mode-vsh-help(){
-      echo ""
       echo "-------------------------------------------------------"
       echo ""
       cat help.txt
